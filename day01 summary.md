@@ -14,7 +14,8 @@ Mainly engaged in java development, welcome to exchange technology with me
   parent管理jar包版本号，同时聚合三个子工程。02继承03,03继承04,05
 2.创建数据库：在本地创建数据库project_crowd，创建t_admin表，作为管理员数据库表
 3.逆向工程（MBG）：06中配置pom.xml，resources中配置generatorConfig.xml，安装两个maven插件，Goals中执行Mybatis-generator:generate
-4.Spring整合mybatis：
+4.Spring整合mybatis：4.1 03中导入Spring和mybatis整合所需的依赖jar包。4.2 02resoureces中配置数据库连接信息文件jdbc.properties。 4.3 02resoureces中配置mybatis-config。xml配置文件。
+  4.4 02resoureces中创建spring-persist-mybatis.xml配置文件开始整合。 4.5 spring-persist-mybatis.xml中引入jdbc.properties，并配置数据库连接
 
 知识点：
 1.查看maven管理项目的某个jar包：Maven中点此项目，工具栏找向上箭头，ctrl+F进行搜索，输入要寻找的jar包名，可以exclude排除（操作后，相应项目的pom.xml文件，相应jar包位置会出现exclusion关键字，里面放的即为排除的jar包）
