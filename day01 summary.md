@@ -26,9 +26,15 @@ Mainly engaged in java development, welcome to exchange technology with me
 5.搭建日志环境： 5.1 排除Spring中的common-logging日志类jar包，用jcl-over-slf4j.jar包转换为slf4j.jar包管理日志，排除方法见知识点1
                5.2 02resoureces中创建logback.xml配置文件，指定文件输出位置，文件输出格式，全局日志级别，局部日志级别
                5.3 在test类中创建Logger类对象进行日志输入测试。
-6.声明式事务管理： 
+6.声明式事务管理： 6.1 创建spring-persist-tx.xml配置文件用来进行事务配置，配置自动扫描的包，把类交给IOC管理
+                 6.2 配置事务管理器DataSourceTransactionManager，在其内配置数据源
+                 6.3 配置事务切面AOP，写入切入点表达式execution，用advisor将切入点表达式和事务通知联系起来
+                 6.4 配置事务通知transaction-manager，在其内配置事务属性tx:attributes
+                 6.5 事务属性，查询方法，readonly；增删改，propagation设置为REQUIRES_NEW,rollback-for设置属性让编译及运行时的异常都回滚
+                 6.6 在test类中自动配置AdminService，创建方法进行测试，观察控制台打印的信息
 
 知识点：
 1.查看maven管理项目的某个jar包：Maven中点此项目，工具栏找向上箭头，ctrl+F进行搜索，输入要寻找的jar包名，可以exclude排除（操作后，相应项目的pom.xml文件，相应jar包位置会出现exclusion关键字，里面放的即为排除的jar包）
 2.@RunWith和@ContextConfiguration注解的使用：@RunWith是一个运行器，可通过此注解指定运行环境；@ContextConfiguration中的locations={classpath}可引入配置文件，需要测试哪个配置文件所管理的bean对象，则将配置文件的相对路径引入即可。
 3.System.out.println本质是流输出，一旦用多了很耗内存，因此输出信息用日志，日志的级别：DEBUG<INFO<WARN<ERROE，若设置日志级别为INFO,则不输出DEBUG的信息
+4.事务通知tx:advice中的事务属性tx:attributes中的tx:method，里面的propagation属性建议赋值为REQUIRES_NEW，这样此tx:method所管理的方法算是一个单独的事务，若赋值为REQUIRED，则事务会受到当前线程中的事物的影响（线程事务回滚，则此方法中的事务也会被迫回滚）
