@@ -23,8 +23,11 @@ Mainly engaged in java development, welcome to exchange technology with me
                     4.7 spring-persist-mybatis.xml配置SqlSessionFactoryBean整合mybatis，里面指定mybatis配置文件，指定Mapper.xml配置文件，装配数据库。
                     4.8 spring-persist-mybatis.xml中配置MapperScannerConfigure来扫描Mapper接口所在的包
                     4.9 创建的test类中进行测试，自动装配Mapper接口，调用接口方法，通过映射文件执行sql语句，观察数据库变化
-5.搭建日志环境：
+5.搭建日志环境： 5.1 排除Spring中的common-logging日志类jar包，用jcl-over-slf4j.jar包转换为slf4j.jar包管理日志，排除方法见知识点1
+               5.2 02resoureces中创建logback.xml配置文件，指定文件输出位置，文件输出格式，全局日志级别，局部日志级别
+6.声明式事务管理： 
 
 知识点：
 1.查看maven管理项目的某个jar包：Maven中点此项目，工具栏找向上箭头，ctrl+F进行搜索，输入要寻找的jar包名，可以exclude排除（操作后，相应项目的pom.xml文件，相应jar包位置会出现exclusion关键字，里面放的即为排除的jar包）
 2.@RunWith和@ContextConfiguration注解的使用：@RunWith是一个运行器，可通过此注解指定运行环境；@ContextConfiguration中的locations={classpath}可引入配置文件，需要测试哪个配置文件所管理的bean对象，则将配置文件的相对路径引入即可。
+3.System.out.println本质是流输出，一旦用多了很耗内存，因此输出信息用日志，日志的级别：DEBUG<INFO<WARN<ERROE，若设置日志级别为INFO,则不输出DEBUG的信息
