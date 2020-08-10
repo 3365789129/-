@@ -25,6 +25,7 @@ Mainly engaged in java development, welcome to exchange technology with me
                     4.9 创建的test类中进行测试，自动装配Mapper接口，调用接口方法，通过映射文件执行sql语句，观察数据库变化
 5.搭建日志环境： 5.1 排除Spring中的common-logging日志类jar包，用jcl-over-slf4j.jar包转换为slf4j.jar包管理日志，排除方法见知识点1
                5.2 02resoureces中创建logback.xml配置文件，指定文件输出位置，文件输出格式，全局日志级别，局部日志级别
+               5.3 在test类中创建Logger类对象进行日志输入测试。
 6.声明式事务管理： 
 
 知识点：
