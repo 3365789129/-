@@ -13,7 +13,9 @@
          3.进行测试：3.1 02中加入依赖
                     3.2 创建handler（用于测试），service（接口层），serviceimpl（业务层）
                     3.3 接口层创建方法，业务层实现方法，handler调用方法，进行测试，并返回指定页面，页面需根据视图解析器，自己创建编写
-
+         4.利用ajax来发送数据：4.1 引入JQuery文件，在index.jsp中编写script标签里的ajax函数s
+                             4.2 方案一：handler中进行测试，用@RequestParam注解接收ajax传过来的json数据会产生400错误，观察请求头改参数，即可成功，别忘了在方法上加@ResponseBody注解。
+                                 handler中方法接受json数据时，在请求参数名字后面加了个【】，很奇怪。（用@RequestParam的弊端？？？ajax应该用@RequestBody来接收参数）
 知识点：
 1. $｛pageContext.request.ContextPath｝取得绝对路径的方法，代表项目名称，相当于/demo，其中demo是项目。
    疑问:使用此路径，为何idea中Tomcat部署启动后，路径中没有项目名
