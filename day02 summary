@@ -2,9 +2,22 @@
 今天主要进行了环境搭建：Spring整合SpringMVC
 
 注意点：
-1.
+1.逆向工程不会生成bean实体类的构造方法，需要自己创建无参构造，有参构造
 
-学习流程：
-
+学习流程：1.配置02中的web.xml文件：1.1 配置ContextLoaderListener，context-param里面加载Spring和mybatis的配置文件，Listener里面配置ContextLoaderListener
+                                1.2 配置filter，CharacterEncodingFilter配置编码方式，放在所有Filter前面，forceRequestEncoding，forceResponseEncoding强制设置编码方式
+                                1.3 配置DispatcherServlet，加载springMVC配置文件，设置加载时机load-on-startup,设置拦截请求类型url-pattern,注意ajax返回参数的类型
+         2.配置02中的springMVC.xml文件：2.1 扫描组件
+                                      2.2 加载注解驱动
+                                      2.3 配置视图解析器
+         3.进行测试：3.1 02中加入依赖
+                    3.2 创建handler（用于测试），service（接口层），serviceimpl（业务层）
+                    3.3 接口层创建方法，业务层实现方法，handler调用方法，进行测试，并返回指定页面，页面需根据视图解析器，自己创建编写
 
 知识点：
+1. $｛pageContext.request.ContextPath｝取得绝对路径的方法，代表项目名称，相当于/demo，其中demo是项目。
+   疑问:使用此路径，为何idea中Tomcat部署启动后，路径中没有项目名
+2. base标签作用: href属性规定了该页面所有链接默认的链接地址，可以减少各标签链接的代码量
+3. @ResponseBody，作用:返回的是json数据，用于异步请求时使用。此注解在方法上使用
+4. @RequestBody，作用:接受请求body里面的部分数据，接受的是Json格式的字符串，若要讲json字符串赋值给类，则类属性名必须与json字符串中的key保持一致，否则请求不过去。
+   此注解常在形参列表中使用，把json数据赋值给类属性
