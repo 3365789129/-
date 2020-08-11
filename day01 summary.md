@@ -1,12 +1,12 @@
 # Default-warehouse
 Mainly engaged in java development, welcome to exchange technology with me
 
-今天主要进行了环境搭建
+今天主要进行了环境搭建：创建工程，创建数据库，逆向工程，Spring与mybatis整合，搭建日志环境，声明式事务管理
 
 注意点：
 1.老师用的是ecilipse封装的STS进行编译，而我使用的是idea，这是一个很大的不同之处
 2.parent,util,reverse在一个目录，webui,component,entity在parent目录下
-3.因为是在06下进行逆向工程，所以映射文件，接口，bean类在06下？？？？？
+3.因为是在06下进行逆向工程，所以映射文件AdminMapper.xml，接口AdminInterface，bean类Admin在06下,AdminMapper.xml放在02，AdminInterface和Admin放在03,04？？？？
 4.01及其子工程中测试类的jar包需要把scope范围去掉，否则@RunWith和@ContextConfiguration注解将无法生效。
 
 学习流程：
