@@ -38,3 +38,9 @@ Mainly engaged in java development, welcome to exchange technology with me
 2.@RunWith和@ContextConfiguration注解的使用：@RunWith是一个运行器，可通过此注解指定运行环境；@ContextConfiguration中的locations={classpath}可引入配置文件，需要测试哪个配置文件所管理的bean对象，则将配置文件的相对路径引入即可。
 3.System.out.println本质是流输出，一旦用多了很耗内存，因此输出信息用日志，日志的级别：DEBUG<INFO<WARN<ERROE，若设置日志级别为INFO,则不输出DEBUG的信息
 4.事务通知tx:advice中的事务属性tx:attributes中的tx:method，里面的propagation属性建议赋值为REQUIRES_NEW，这样此tx:method所管理的方法算是一个单独的事务，若赋值为REQUIRED，则事务会受到当前线程中的事物的影响（线程事务回滚，则此方法中的事务也会被迫回滚）
+5.自动装配的理解:5.1 首先spring中开启注解扫描
+               5.2.在接口的实现类上加上注解，接口不加
+               5.3.类中定义接口属性，其上加@Autowired注解，实现自动装配
+               注：因为接口和实现类类型一样，所以虽然定义的是接口，但最终会装配到实现类上（类比多态的向上转型）
+6.向上转型: 父类引用指向子类对象Animal a = new Cat()，a调用子类重写父类的方法（这一步可以减少代码量，是向上转型的优点，无需每个子类重写调用方法），子类特有的方法会丢失。
+  向下转型: 必须在向上转型之后进行，Animal a = new Cat()，Cat c=(Cat) a，有危险，Dog引用a则会报错，c可调用子类特有的方法
