@@ -23,3 +23,7 @@
 3. @ResponseBody，作用:返回的是json数据，用于异步请求时使用。此注解在方法上使用
 4. @RequestBody，作用:接受请求body里面的部分数据，接受的是Json格式的字符串，若要讲json字符串赋值给类，则类属性名必须与json字符串中的key保持一致，否则请求不过去。
    此注解常在形参列表中使用，把json数据赋值给类属性
+5.  Idea中Ajax点击无效的情况。
+    分析:.click是$（selector）.on(events,handler)的缩写，而它只会对当前已经存在，且满足selector条件的元素绑定events，之后加入到DOM中的元素无法进行绑定。
+    解决:对所有当前或者未来满足selector条件的元素绑定到对应的events中，语法:$（document）.on(events,selector,data,handler)或者:$（'body'）.on(events,'子元素',handler)。
+    注:'body'也可换成子元素的直接父元素，但若在event里面子元素的直接父元素也添加了新的元素，则父元素也不好使，所以绑定body中最安心，因为body一定存在
