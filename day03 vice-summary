@@ -10,7 +10,9 @@
                           4.2 创建CrowdUtil类，判断当前请求是否为ajax请求，是返回true，不是返回false
                           4.3 创建基于注解的异常映射：创建CrowdExceptionResolver，用@ControllerAdvice标签标注类，表示是个异常处理器类
                                                   判断是否为ajax请求，若是则创建ResultEntity类对象，调用请求失败返回失败信息的方法，将失败信息转换为json字符串并返回给浏览器
-                                                  若不是ajax请求，则创建ModelAndView对象，将Exception存入其中，设置视图名称，返回ModelAndView对象                                 
+                                                  若不是ajax请求，则创建ModelAndView对象，将Exception存入其中，设置视图名称，返回ModelAndView对象
+         5.创建常量类:管理常量，避免某个字母拼写错误。
+       
 知识点：
 1.415错误总结：415错误出现的原因：请求数据发送给服务器，服务器无法识别这种数据类型，因此拒绝服务
              415错误的解决办法：前端需要先转换成json字符串，在ajax请求中加入contentType定义请求体的数据类型（告诉服务器是这种类型，让其处理）
