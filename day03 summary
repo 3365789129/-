@@ -2,11 +2,15 @@
 今天主要进行了：ajax方案二，三，复杂对象请求处理，自定义异常机制的环境搭建。
 
 注意点：
+1.问题：所有ajax中的回调函数，均没有alert弹出内容
 
 学习流程：
-1.利用ajax处理请求数据：代码同方案一大致相同，不同之处：前端中将ajax请求里面的url改一下，将“data”由“array”:[5,8,12]改为，“array[0]”:5,“array[1]”:8,“array[2]”:12。 
-                                                 后端部分:创建ParamData类，成员变量名设置为array，handler部分参数列表用ParamData类对象接收
-                                                 
+1.利用ajax处理请求数据：方案二：代码同方案一大致相同，不同之处：前端中将ajax请求里面的url改一下，将“data”由“array”:[5,8,12]改为，“array[0]”:5,“array[1]”:8,“array[2]”:12。 
+                                                 后端部分:创建ParamData类，成员变量名设置为array，handler部分参数列表用ParamData类对象接收，调动get方法得到参数，进行处理
+                     方案三：前两种方案发送的请求参数都是JSON数组，方案三不同之处：前段中将要发送给服务器端的数组通过var命名，再通过JSON的stringify方法转化成了字符串，
+                                                                           ajax定义“data”为Json字符串的变量名，同时告诉服务器端要发送的请求体的内容类型
+                                                                           "contentType":"application/json;charset=UTF-8"。
+                                                                           后端部分：handler类中用@RequestBody进行接收，此时一定要注意springmvc配置文件中的mvc命名空间是否正确
       
 
 知识点：
