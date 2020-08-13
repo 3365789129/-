@@ -4,8 +4,13 @@
 
 
 学习流程：1.ajax发送复杂对象：创建几个类，在前端中命名好要发送的数据，将json对象转换为字符串，发送ajax请求。后端中用@RequestBody接收
-
-                                                                                    
+         2.统一项目中ajax请求返回的结果：创建工具类ResultEntity来，三个方法：请求成功无需返回响应的方法，请求成功需返回响应的方法，请求失败返回失败信息的方法
+         3.测试：创建ResultEntity类对象，用请求成功需返回响应的方法测试，返回测试类对象，前端datatype改为json，回调函数调成console.log，观察控制台信息
+         4.建立异常映射机制：4.1 建立基于xml的异常映射：springmvc配置文件中配置异常类型和具体视图页面的对应关系。请求==>@RequestMapping==>基于xml异常映射来处理
+                          4.2 创建CrowdUtil类，判断当前请求是否为ajax请求，是返回true，不是返回false
+                          4.3 创建基于注解的异常映射：创建CrowdExceptionResolver，用@ControllerAdvice标签标注类，表示是个异常处理器类
+                                                  判断是否为ajax请求，若是则创建ResultEntity类对象，调用请求失败返回失败信息的方法，将失败信息转换为json字符串并返回给浏览器
+                                                  若不是ajax请求，则创建ModelAndView对象，将Exception存入其中，设置视图名称，返回ModelAndView对象                                 
 知识点：
 1.415错误总结：415错误出现的原因：请求数据发送给服务器，服务器无法识别这种数据类型，因此拒绝服务
              415错误的解决办法：前端需要先转换成json字符串，在ajax请求中加入contentType定义请求体的数据类型（告诉服务器是这种类型，让其处理）
