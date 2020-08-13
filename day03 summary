@@ -15,7 +15,7 @@
                                                                                     阿里的命名空间是错的，正确的应该是springframework，不然会报415错误，且出错的地方极其难找！
                                                                                     
 知识点：
-1. 1.1@RequestMapping是用来处理请求地址映射的注解，前端定义的动态参数，要与@PathVariable配合；
+1. 1.1@RequestMapping是用来处理请求地址映射的注解，当用了前端定义的动态参数，要与@PathVariable配合；
    1.2@ResponseBody作用是将该方法返回的结果直接响应到HTTP正文当中，因此最后写上return"success"；时不会配合视图解析器跳转到success.jsp页面，而是直接将"success"字符串返回给HTTP响应正文
   （因此在回调函数中，alert(response）弹出的是success），通常在异步请求时使用，即返回的数据不是html页面标签，而是json,xml等格式的数据的时候使用。
    1.3@RequestBody作用是将HTTP请求内容插入到方法当中，需要注意的是request中body部分的数据编码格式由request header中的contentType所指定（contentType可在ajax中进行设置），
