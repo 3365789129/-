@@ -5,7 +5,8 @@
 
 学习流程：
 1.利用ajax处理请求数据：代码同方案一大致相同，不同之处：前端中将ajax请求里面的url改一下，将“data”由“array”:[5,8,12]改为，“array[0]”:5,“array[1]”:8,“array[2]”:12。 
-                                                 后端部分:创建ParamData
+                                                 后端部分:创建ParamData类，成员变量名设置为array，handler部分参数列表用ParamData类对象接收
+                                                 
       
 
 知识点：
