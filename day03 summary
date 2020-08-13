@@ -29,6 +29,7 @@
 2. tomcat处理一个HTTP请求的过程：2.1 用户输入请求地址http://localhost8080/iportal/index.jsp来发送请求，请求到与地址中对应的端口号  
                               2.2 server.xml文件中，<Connector>用来接收8080端口号的用户请求，并将其发送给<Engine>处理
                               2.3 <Engine>会去<host>中匹配主机，匹配到主机名为localhost（与请求地址中的主机名称相对应）
-                              2.4 <host>获得请求/iportal/index.jsp，会去<Context>中匹配/iportal路径的<Context>，若没有匹配到，则把""交给Context处理
-                              2.5 web.xml中匹配.jsp，对格式为jsp的请求进行设置（拦截等等）。
-                              2.6 tomcat服务器构造HttpServletRequest对象和HttpServletResponse对象，可在后端中进行业务处理（注意路径匹配），最后把HttpServletResponse对象返回给Host
+                              2.4 <host>获得请求/iportal/index.jsp，会去<Context>中匹配/iportal路径的<Context>，匹配到，则<Context>获得请求/index.jsp,若没有匹配到，则把""交给Context处理
+                              2.5 <Context>匹配url parttern为*.jsp的Servlet，对应JspServlet类。
+                              2.6 tomcat服务器构造HttpServletRequest对象和HttpServletResponse对象，可在后端中进行业务处理（注意路径匹配），
+                              最后Context会把HttpServletResponse对象返回给Host，一步步往上传最终响应用户
