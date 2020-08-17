@@ -1,20 +1,37 @@
-今天主要进行了：
-
+今天主要进行了：管理员登录页面的前后端搭建，登录检查=>拦截器，管理员登录成功后的管理员维护部分主页面搭建，维护部分分页功能实现，维护部分关键词查询功能实现。
 
 注意点：
-
 
 学习流程：1.创建管理员登录页面admin-login,jsp（前端）。源码复制粘贴，写上base标签，设置好name属性用于传递参数，登录按钮设置为submit，提交表单数据。
          2.springmvc中配置view-controller，实现页面跳转，这个跳转path="/admin/to/login/page.html" view-name="admin-login"，在退出登录操作中有用
          3.引入layer文件，优化弹窗页面
          4.修饰system-error.jsp页面，作为登录检查失败后，跳转到的页面
+         
          5.开始后端部分，首先CrowdUtil中创建md5工具方法用于加密登录密码，判断传参是否有效，获取MessageDigest对象，获取传参的字节数组，disgest方法加密，创建BigInteger对象，
-         接收加密后的字节数组，按16进制将bigInteger值转换为字符串，返回转换后的结果
+         接收加密后的字节数组，按16进制将bigInteger值转换为字符串，返回转换后的结果。
+         
          6.创建自定义异常类，作为登录失败后抛出的异常，继承RuntimeException，在CrowdExceptionResolver类中对这种异常进行处理，并在admin-login页面显示异常信息
+         
          7.创建Adminhandler类，自动装配service，@RequestMapping接收请求消息，调用service.getAdminByLoginAcct方法进行登录检查（传参账号密码），
          成功返回Admin对象，将对象存入session，并跳转到admin-main页面
          8.创建getAdminByLoginAcct方法，传参账号密码，进行检查（criteria封装？？？），判断Admin是否为空，为空抛异常，不为空则从admin中取出密码，进行加密，
          而后进行比较，不一致抛异常，一致则返回Admin对象
          9.修饰admin-main页面，且handler中配合view-controller重定向到admin-main页面
+         
          10.退出登录操作，修改前端链接，后端handler中接收，传参session，调用session.invalidate方法让session失效，通过view-controller定向到admin-login页面
+         11.前端的后台主页面共性代码抽取出来，放入include-head.jsp，include-nav.jsp，include-sidebar.jsp中，建立模板
+         
+         12.登录检查，创建拦截器类LoginInterceptor继承HandlerInterceptorAdapter，重写preHandle方法：从request中获取session对象，从session中获取Admin对象，判断是否为空，
+         若为空，则抛出AccessForbiddenException异常（继承RuntimeException,交由CrowdExceptionResolver处理，调至admin-login页面）；若不为空，返回true放行。
+         13.在springmvc配置文件中注册拦截器<mvc:interceptors>中注册，里面写上bean进行配置拦截器类
+         
+         14.pom.xml中引入PageHelper分页插件，mybatis配置文件中配置插件，AdminMapper.xml中编写关键词查询语句，AdminMapper接口中编写查询方法selectAdminByKeyword（返回List<Admin>集合，传入关键词）。
+         15.AdminService中创建getPageInfo方法，Impl中进行实现：返回值为PageInfo<Admin>类型，参数为keyword,pageNum,pageSize.调用PageHelper.startPage方法传入Num,Size
+         来开启分页功能，执行查询方法selectAdminByKeyword并接收返回结果，封装到PageInfo对象中作为结果返回。      Impl中的getPageInfo方法充分体现了非侵入式的设计，原本要做的查询不必有任何修改。
+         16.Handler中编写getPageInfo方法，用@RequestParam注解来接收前端请求内容，调用Service的getPageInfo方法获取PageInfo对象，将其存入modelMap中，并返回至admin-page页面
+         17.admin-page.jsp页面中通过requestScope.pageInfo.list获取数据库中的Admin集合数据
+         18.分页导航条，引入pagination.js文件及相应css样式（在JQuery后面引入），admin-page的function函数中调用initPagination方法对页码导航条进行初始化操作（方法里面很复杂，搞不懂）
+         19.创建function pageSelectCallback函数作为回调函数，来实现分页时页面跳转，在跳转页面代码处获取keyword来保持查询条件的同时实现页面跳转
+         
+        
 知识点：
