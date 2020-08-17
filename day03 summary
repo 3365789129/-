@@ -22,7 +22,8 @@
    注：get方法无请求体，因此用@RequestBody注解时，提交的方法只能是POST。
    1.4@RequestBody与@RequestParam的区别：1.4.1 @RequestParam主要处理的是contentType为application/x-www-form-urlencoded类型的数据（默认），而@RequestBody一般用于处理
                                        非contentType为application/x-www-form-urlencoded编码方式的数据，主要用于在ajax中处理contentType为application/json类型的数据；
-                                       1.4.2 @RequestParam声明的变量名要与前端传过来的变量名一致，@RequestBody声明的是对象，对象中的属性名要与前端传过来的key值一致
+                                       1.4.2 @RequestParam声明的变量名要与前端传过来的变量名一致，@RequestBody接收json字符串，声明的变量要与字符串的key保持一致，
+                                       若声明的是个类，则类的属性名要与字符串的key保持一致，否则参数无法传递。
                                        1.4.3 @RequestParam在方法中可使用多次，而@RequestBody在方法中只能使用一次（用一次后就自动关闭IO流）。
                                        1.4.4 @RequestParam接受的参数来自请求头，即requestHeader中，而@RequestBody接受的参数来自请求体
                                        1.4.5 在get请求中无法使用@RequestBody。
