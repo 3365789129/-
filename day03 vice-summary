@@ -21,4 +21,5 @@
              如果不正确，@RequestBody不报错，但注解不起作用。在启动项目时还是会出现415错误，且错误十分难找。
 2.ModelAndView作用：2.1 返回指定页面 setViewName方法（同springmvc配置文件中的视图解析器一同使用）；另：其构造方法也可指定返回的页面名称
                    2.2 返回所需数值 addObject方法（作用同request.setattribute方法一样，在一个页面请求中传递处理的数据，用于传递控制方法处理结果数据到结果页面)
-                   ,addObject方法参数列表的具体意义???前一个参数字符串类型,和前端el表达式有联系??
+                   ,addObject方法参数列表的具体意义???前一个参数字符串类型,和前端el表达式有联系??   已解决：addObject参数列表中，存放的是（String key,Object value），前端可通过
+                   el表达式的${key}来获取到其内的value.
