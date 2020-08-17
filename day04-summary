@@ -1,1 +1,20 @@
+今天主要进行了：
 
+
+注意点：
+
+
+学习流程：1.创建管理员登录页面admin-login,jsp（前端）。源码复制粘贴，写上base标签，设置好name属性用于传递参数，登录按钮设置为submit，提交表单数据。
+         2.springmvc中配置view-controller，实现页面跳转，这个跳转path="/admin/to/login/page.html" view-name="admin-login"，在退出登录操作中有用
+         3.引入layer文件，优化弹窗页面
+         4.修饰system-error.jsp页面，作为登录检查失败后，跳转到的页面
+         5.开始后端部分，首先CrowdUtil中创建md5工具方法用于加密登录密码，判断传参是否有效，获取MessageDigest对象，获取传参的字节数组，disgest方法加密，创建BigInteger对象，
+         接收加密后的字节数组，按16进制将bigInteger值转换为字符串，返回转换后的结果
+         6.创建自定义异常类，作为登录失败后抛出的异常，继承RuntimeException，在CrowdExceptionResolver类中对这种异常进行处理，并在admin-login页面显示异常信息
+         7.创建Adminhandler类，自动装配service，@RequestMapping接收请求消息，调用service.getAdminByLoginAcct方法进行登录检查（传参账号密码），
+         成功返回Admin对象，将对象存入session，并跳转到admin-main页面
+         8.创建getAdminByLoginAcct方法，传参账号密码，进行检查（criteria封装？？？），判断Admin是否为空，为空抛异常，不为空则从admin中取出密码，进行加密，
+         而后进行比较，不一致抛异常，一致则返回Admin对象
+         9.修饰admin-main页面，且handler中配合view-controller重定向到admin-main页面
+         10.退出登录操作，修改前端链接，后端handler中接收，传参session，调用session.invalidate方法让session失效，通过view-controller定向到admin-login页面
+知识点：
