@@ -1,1 +1,17 @@
+今天主要学习了：管理员维护部分单条删除功能实现，新增功能实现，更新功能实现。
 
+学习流程：1.单条删除功能实现：修改admin-page页面的remove按钮为<a>标签，并传递id，pageNum，keyword参数${admin.Id}/${requestScope.pageInfo.pageNum}/{param.keyword}
+         2.在AdminHandler中创建remove方法，并用@PathVariable注解接受id，pageNum,keyword参数{adminId},"adminId"，Integer adminId;调用Service中的remove方法（自己创建，impl中调用mapper的delete方法）。
+         3.AdminHandler中进行重定向，方案一：定向到admin-page页面，无法显示分页数据；方案二：转发到admin/get/page.html，刷新页面会重复执行删除浪费性能；
+         方案三：转发到admin/get/page.html页面并附加pageNum和keyword两个请求参数。
+         
+         4.新增功能实现：给表中添加唯一约束，让账号唯一（添加时注意账号的字段名不能有重复数据，否则会报1062错误），view-controller中实现新增按钮跳转到新增页面
+         5.新增页面admin-add修改action参数，其下接收新增失败的异常信息，在AdminHandler中调用Service中的savaAdmin方法，传参admin，对userPswd进行密码加密，生成创建时间，调用mapper的insert方法保存
+         6.handler中重定向到admin/get/page页面，并附加pageNum参数，赋值为int最大值（增加完之后直接跳转到数据列表最后）。处理唯一约束异常
+         
+         7.更新功能实现：修改admin-page页面中更新按钮，新增<a>标签，传递id，Num，keyword参数。AdminHandler中创建toEditPage方法,调用Service的getAdminById方法获取admin对象，存入模型
+         8.重定向到admin-edit页面，Service中创建getAdminById方法，impl中调用mapper的selectByPrimaryKey方法并返回，创建admin-edit页面，修改相应信息。
+         9.AdminHandler中创建update方法，接收admin，pageNum，keyword参数，并调用Service中的update方法，重定向至admin/get/page.htmL中，并附加参数pageNum，keyword
+         10.在service的update方法中调用mapper的updateByPrimaryKeySelective方法
+
+知识点：1.input标签中的hidden属性，用于提交表单数据时，不被用户看到
